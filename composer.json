@@ -49,6 +49,9 @@
         ],
         "phpstan": [
             "@php vendor/bin/phpstan analyse -c phpstan.neon"
+        ],
+        "pint": [
+            "@php vendor/bin/pint --config pint.json"
         ]
     },
     "extra": {
