@@ -15,21 +15,33 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
-  unit-tests:
+  code-quality-checks-workflow:
+    name: Code Quality Workflow Setup
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ./.github/actions/setup
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          ini-values: error_reporting=E_ALL
+          tools: composer:v2
+          coverage: none
+
+      - name: Run composer install
+        run: composer install -n --prefer-dist
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
 
       - name: Run tests
         run: php artisan test
-
-  phpstan:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: ./.github/actions/setup
 
       - name: PHPStan Analysis
         uses: php-actions/phpstan@v3
@@ -37,12 +49,6 @@ jobs:
           configuration: phpstan.neon
           path: app/ tests/
           error_format: github
-
-  code-formatting:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: ./.github/actions/setup
 
       - name: Code Formating
         run: php ./vendor/bin/pint --config pint.json --test
