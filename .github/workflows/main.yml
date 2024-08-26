@@ -15,10 +15,10 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
-  tests:
-    name: Run Unit Tests
+  code-quality-checks-workflow:
+    name: Code Quality Workflow Setup
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,8 +46,9 @@ jobs:
       - name: PHPStan Analysis
         uses: php-actions/phpstan@v3
         with:
-          configuration:  phpstan.neon
+          configuration: phpstan.neon
           path: app/ tests/
+          error_format: github
 
       - name: Code Formating
         run: php ./vendor/bin/pint --config pint.json --test
