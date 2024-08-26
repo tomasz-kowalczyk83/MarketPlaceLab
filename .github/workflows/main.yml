@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ./.github/actions/setup.yml
+      - uses: ./.github/actions/setup
 
       - name: Run tests
         run: php artisan test
@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ./.github/actions/setup.yml
+      - uses: ./.github/actions/setup
 
       - name: PHPStan Analysis
         uses: php-actions/phpstan@v3
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ./.github/actions/setup.yml
+      - uses: ./.github/actions/setup
 
       - name: Code Formating
         run: php ./vendor/bin/pint --config pint.json --test
