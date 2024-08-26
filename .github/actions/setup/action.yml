@@ -1,9 +1,10 @@
 name: Code Quality Workflow Setup
 
+outputs:
+  composer-cache: ${{ steps.composer-cache.outputs.cache-hit }}
+
 runs:
   using: 'composite'
-  outputs:
-    composer-cache: ${{ steps.composer-cache.outputs.cache-hit }}
 
   steps:
     - name: Checkout code
