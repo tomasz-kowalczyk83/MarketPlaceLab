@@ -37,10 +37,11 @@ Main features:
 
 #### Product
 Managed by vendor. 
-*  Can be sold on any channel once 
 
 Main features:
-* different product types that can be configured including extra fields
+* Different product types that can be configured including extra fields
+* Can be sold on any channel once it has been assigned to that channel
+
 
 #### Coupon 
 * Managed by vendor
